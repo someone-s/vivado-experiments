@@ -7,7 +7,7 @@ XIic_Config XIic_ConfigTable[] __attribute__ ((section (".drvcfg_sec"))) = {
 		0x41600000, /* reg */
 		0x0, /* xlnx,ten-bit-adr */
 		0x8, /* xlnx,gpo-width */
-		0x401d, /* interrupts */
+		0x401e, /* interrupts */
 		0xf8f01000 /* interrupt-parent */
 	},
 	 {

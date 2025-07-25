@@ -1,4 +1,4 @@
-domain_path: /home/eden/Documents/ps-pl-iic-control-software/platform/zynq_fsbl/zynq_fsbl_bsp
+domain_path: /home/eden/Documents/vivado-experiments/ps-pl-iic-control-software/platform/zynq_fsbl/zynq_fsbl_bsp
 app_src_dir: /tools/Xilinx/2025.1/Vitis/data/embeddedsw/lib/sw_apps/zynq_fsbl
 template: zynq_fsbl
 lang: c

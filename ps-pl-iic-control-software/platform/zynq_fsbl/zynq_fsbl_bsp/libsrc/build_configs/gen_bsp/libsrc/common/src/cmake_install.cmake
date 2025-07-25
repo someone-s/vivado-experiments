@@ -1,4 +1,4 @@
-# Install script for directory: /home/eden/Documents/ps-pl-iic-control-software/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/common/src
+# Install script for directory: /home/eden/Documents/vivado-experiments/ps-pl-iic-control-software/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/common/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

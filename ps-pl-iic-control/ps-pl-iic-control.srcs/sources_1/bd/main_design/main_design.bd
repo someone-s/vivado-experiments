@@ -2179,7 +2179,7 @@
         "has_run_ip_tcl": "true",
         "parameters": {
           "C_INTERRUPT_PRESENT": {
-            "value": "0"
+            "value": "1"
           },
           "GPIO2_BOARD_INTERFACE": {
             "value": "arduino_ar0_ar13"
@@ -3095,7 +3095,7 @@
         "has_run_ip_tcl": "true",
         "parameters": {
           "C_INTERRUPT_PRESENT": {
-            "value": "0"
+            "value": "1"
           },
           "GPIO2_BOARD_INTERFACE": {
             "value": "btns_4bits"
@@ -3122,6 +3122,9 @@
           "C_GPIO_WIDTH": {
             "value": "8"
           },
+          "C_INTERRUPT_PRESENT": {
+            "value": "1"
+          },
           "GPIO_BOARD_INTERFACE": {
             "value": "Custom"
           },
@@ -3143,8 +3146,23 @@
             "value_src": "propagated",
             "value_mode": "auto"
           },
+          "IN2_WIDTH": {
+            "value": "1",
+            "value_src": "propagated",
+            "value_mode": "auto"
+          },
+          "IN3_WIDTH": {
+            "value": "1",
+            "value_src": "propagated",
+            "value_mode": "auto"
+          },
+          "IN4_WIDTH": {
+            "value": "1",
+            "value_src": "propagated",
+            "value_mode": "auto"
+          },
           "NUM_PORTS": {
-            "value": "2"
+            "value": "5"
           }
         }
       }
@@ -3254,6 +3272,24 @@
       }
     },
     "nets": {
+      "axi_gpio_arduino_ip2intc_irpt": {
+        "ports": [
+          "axi_gpio_arduino/ip2intc_irpt",
+          "ilconcat_0/In3"
+        ]
+      },
+      "axi_gpio_debug_ip2intc_irpt": {
+        "ports": [
+          "axi_gpio_debug/ip2intc_irpt",
+          "ilconcat_0/In0"
+        ]
+      },
+      "axi_gpio_switchbutton_ip2intc_irpt": {
+        "ports": [
+          "axi_gpio_switchbutton/ip2intc_irpt",
+          "ilconcat_0/In4"
+        ]
+      },
       "axi_iic_arduino_gpo": {
         "ports": [
           "axi_iic_arduino/gpo",
@@ -3263,13 +3299,13 @@
       "axi_iic_arduino_iic2intc_irpt": {
         "ports": [
           "axi_iic_arduino/iic2intc_irpt",
-          "ilconcat_0/In0"
+          "ilconcat_0/In1"
         ]
       },
       "axi_single_spi_arduino_ip2intc_irpt": {
         "ports": [
           "axi_single_spi_arduino/ip2intc_irpt",
-          "ilconcat_0/In1"
+          "ilconcat_0/In2"
         ]
       },
       "ilconcat_0_dout": {

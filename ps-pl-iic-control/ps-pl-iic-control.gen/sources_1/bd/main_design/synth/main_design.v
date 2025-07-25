@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.1 (lin64) Build 6140274 Wed May 21 22:58:25 MDT 2025
-//Date        : Thu Jul 24 20:08:25 2025
+//Date        : Fri Jul 25 20:52:59 2025
 //Host        : ubuntu2204 running 64-bit Ubuntu 22.04.5 LTS
 //Command     : generate_target main_design.bd
 //Design      : main_design
@@ -836,6 +836,9 @@ module main_design
   wire [13:0]arduino_ar0_ar13_tri_i;
   wire [13:0]arduino_ar0_ar13_tri_o;
   wire [13:0]arduino_ar0_ar13_tri_t;
+  wire axi_gpio_arduino_ip2intc_irpt;
+  wire axi_gpio_debug_ip2intc_irpt;
+  wire axi_gpio_switchbutton_ip2intc_irpt;
   wire [7:0]axi_iic_arduino_gpo;
   wire axi_iic_arduino_iic2intc_irpt;
   wire [31:0]axi_interconnect_0_M00_AXI_ARADDR;
@@ -948,7 +951,7 @@ module main_design
   wire i2c_sda_i;
   wire i2c_sda_o;
   wire i2c_sda_t;
-  wire [1:0]ilconcat_0_dout;
+  wire [4:0]ilconcat_0_dout;
   wire [3:0]leds_4bits_tri_i;
   wire [3:0]leds_4bits_tri_o;
   wire [3:0]leds_4bits_tri_t;
@@ -1018,6 +1021,7 @@ module main_design
         .gpio_io_i(arduino_a0_a5_tri_i),
         .gpio_io_o(arduino_a0_a5_tri_o),
         .gpio_io_t(arduino_a0_a5_tri_t),
+        .ip2intc_irpt(axi_gpio_arduino_ip2intc_irpt),
         .s_axi_aclk(processing_system7_0_FCLK_CLK0),
         .s_axi_araddr(axi_interconnect_0_M00_AXI_ARADDR[8:0]),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
@@ -1039,6 +1043,7 @@ module main_design
         .s_axi_wvalid(axi_interconnect_0_M00_AXI_WVALID));
   main_design_axi_gpio_0_3 axi_gpio_debug
        (.gpio_io_i(axi_iic_arduino_gpo),
+        .ip2intc_irpt(axi_gpio_debug_ip2intc_irpt),
         .s_axi_aclk(processing_system7_0_FCLK_CLK0),
         .s_axi_araddr(axi_interconnect_0_M05_AXI_ARADDR[8:0]),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
@@ -1087,6 +1092,7 @@ module main_design
   main_design_axi_gpio_0_2 axi_gpio_switchbutton
        (.gpio2_io_i(btns_4bits_tri_i),
         .gpio_io_i(sws_2bits_tri_i),
+        .ip2intc_irpt(axi_gpio_switchbutton_ip2intc_irpt),
         .s_axi_aclk(processing_system7_0_FCLK_CLK0),
         .s_axi_araddr(axi_interconnect_0_M04_AXI_ARADDR[8:0]),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
@@ -1325,7 +1331,7 @@ module main_design
         .ss_i(spi_ss_i),
         .ss_o(\^spi_ss_o ),
         .ss_t(spi_ss_t));
-  assign ilconcat_0_dout = {axi_single_spi_arduino_ip2intc_irpt, axi_iic_arduino_iic2intc_irpt};
+  assign ilconcat_0_dout = {axi_gpio_switchbutton_ip2intc_irpt, axi_gpio_arduino_ip2intc_irpt, axi_single_spi_arduino_ip2intc_irpt, axi_iic_arduino_iic2intc_irpt, axi_gpio_debug_ip2intc_irpt};
   main_design_proc_sys_reset_0_0 proc_sys_reset_0
        (.aux_reset_in(1'b1),
         .dcm_locked(1'b1),

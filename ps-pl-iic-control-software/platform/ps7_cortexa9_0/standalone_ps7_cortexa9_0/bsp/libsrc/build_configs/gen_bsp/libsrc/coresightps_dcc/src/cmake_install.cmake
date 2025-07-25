@@ -1,4 +1,4 @@
-# Install script for directory: /home/eden/Documents/ps-pl-iic-control-software/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/coresightps_dcc/src
+# Install script for directory: /home/eden/Documents/vivado-experiments/ps-pl-iic-control-software/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/coresightps_dcc/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
