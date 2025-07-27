@@ -30,7 +30,6 @@
       "axi_single_spi_arduino": "",
       "axi_gpio_led": "",
       "axi_gpio_switchbutton": "",
-      "axi_gpio_debug": "",
       "ilconcat_0": ""
     },
     "interface_ports": {
@@ -3108,31 +3107,6 @@
           }
         }
       },
-      "axi_gpio_debug": {
-        "vlnv": "xilinx.com:ip:axi_gpio:2.0",
-        "ip_revision": "37",
-        "xci_name": "main_design_axi_gpio_0_3",
-        "xci_path": "ip/main_design_axi_gpio_0_3/main_design_axi_gpio_0_3.xci",
-        "inst_hier_path": "axi_gpio_debug",
-        "has_run_ip_tcl": "true",
-        "parameters": {
-          "C_ALL_INPUTS": {
-            "value": "1"
-          },
-          "C_GPIO_WIDTH": {
-            "value": "8"
-          },
-          "C_INTERRUPT_PRESENT": {
-            "value": "1"
-          },
-          "GPIO_BOARD_INTERFACE": {
-            "value": "Custom"
-          },
-          "USE_BOARD_FLOW": {
-            "value": "true"
-          }
-        }
-      },
       "ilconcat_0": {
         "vlnv": "xilinx.com:inline_hdl:ilconcat:1.0",
         "parameters": {
@@ -3162,7 +3136,7 @@
             "value_mode": "auto"
           },
           "NUM_PORTS": {
-            "value": "5"
+            "value": "4"
           }
         }
       }
@@ -3240,12 +3214,6 @@
           "axi_gpio_switchbutton/S_AXI"
         ]
       },
-      "axi_interconnect_0_M05_AXI": {
-        "interface_ports": [
-          "axi_interconnect_0/M05_AXI",
-          "axi_gpio_debug/S_AXI"
-        ]
-      },
       "axi_single_spi_0_arduino_SPI_0": {
         "interface_ports": [
           "spi",
@@ -3275,37 +3243,25 @@
       "axi_gpio_arduino_ip2intc_irpt": {
         "ports": [
           "axi_gpio_arduino/ip2intc_irpt",
-          "ilconcat_0/In3"
-        ]
-      },
-      "axi_gpio_debug_ip2intc_irpt": {
-        "ports": [
-          "axi_gpio_debug/ip2intc_irpt",
-          "ilconcat_0/In0"
+          "ilconcat_0/In2"
         ]
       },
       "axi_gpio_switchbutton_ip2intc_irpt": {
         "ports": [
           "axi_gpio_switchbutton/ip2intc_irpt",
-          "ilconcat_0/In4"
-        ]
-      },
-      "axi_iic_arduino_gpo": {
-        "ports": [
-          "axi_iic_arduino/gpo",
-          "axi_gpio_debug/gpio_io_i"
+          "ilconcat_0/In3"
         ]
       },
       "axi_iic_arduino_iic2intc_irpt": {
         "ports": [
           "axi_iic_arduino/iic2intc_irpt",
-          "ilconcat_0/In1"
+          "ilconcat_0/In0"
         ]
       },
       "axi_single_spi_arduino_ip2intc_irpt": {
         "ports": [
           "axi_single_spi_arduino/ip2intc_irpt",
-          "ilconcat_0/In2"
+          "ilconcat_0/In1"
         ]
       },
       "ilconcat_0_dout": {
@@ -3329,7 +3285,6 @@
           "axi_interconnect_0/M03_ARESETN",
           "axi_gpio_switchbutton/s_axi_aresetn",
           "axi_interconnect_0/M04_ARESETN",
-          "axi_gpio_debug/s_axi_aresetn",
           "axi_interconnect_0/M05_ARESETN"
         ]
       },
@@ -3351,7 +3306,6 @@
           "axi_interconnect_0/M03_ACLK",
           "axi_gpio_switchbutton/s_axi_aclk",
           "axi_interconnect_0/M04_ACLK",
-          "axi_gpio_debug/s_axi_aclk",
           "axi_interconnect_0/M05_ACLK"
         ]
       },
@@ -3370,11 +3324,6 @@
               "SEG_axi_gpio_0_Reg": {
                 "address_block": "/axi_gpio_arduino/S_AXI/Reg",
                 "offset": "0x41200000",
-                "range": "64K"
-              },
-              "SEG_axi_gpio_debug_Reg": {
-                "address_block": "/axi_gpio_debug/S_AXI/Reg",
-                "offset": "0x41230000",
                 "range": "64K"
               },
               "SEG_axi_gpio_led_Reg": {

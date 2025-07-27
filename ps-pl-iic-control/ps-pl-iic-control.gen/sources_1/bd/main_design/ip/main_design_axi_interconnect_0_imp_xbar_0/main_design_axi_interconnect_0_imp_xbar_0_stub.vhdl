@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.1 (lin64) Build 6140274 Wed May 21 22:58:25 MDT 2025
--- Date        : Thu Jul 24 17:36:55 2025
+-- Date        : Mon Jul 28 00:09:34 2025
 -- Host        : ubuntu2204 running 64-bit Ubuntu 22.04.5 LTS
 -- Command     : write_vhdl -force -mode synth_stub
---               /home/eden/Documents/ps-pl-iic-control/ps-pl-iic-control.gen/sources_1/bd/main_design/ip/main_design_axi_interconnect_0_imp_xbar_0/main_design_axi_interconnect_0_imp_xbar_0_stub.vhdl
+--               /home/eden/Documents/vivado-experiments/ps-pl-iic-control/ps-pl-iic-control.gen/sources_1/bd/main_design/ip/main_design_axi_interconnect_0_imp_xbar_0/main_design_axi_interconnect_0_imp_xbar_0_stub.vhdl
 -- Design      : main_design_axi_interconnect_0_imp_xbar_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1
@@ -60,7 +60,7 @@ entity main_design_axi_interconnect_0_imp_xbar_0 is
   attribute CHECK_LICENSE_TYPE : string;
   attribute CHECK_LICENSE_TYPE of main_design_axi_interconnect_0_imp_xbar_0 : entity is "main_design_axi_interconnect_0_imp_xbar_0,axi_crossbar_v2_1_37_axi_crossbar,{}";
   attribute CORE_GENERATION_INFO : string;
-  attribute CORE_GENERATION_INFO of main_design_axi_interconnect_0_imp_xbar_0 : entity is "main_design_axi_interconnect_0_imp_xbar_0,axi_crossbar_v2_1_37_axi_crossbar,{x_ipProduct=Vivado 2025.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axi_crossbar,x_ipVersion=2.1,x_ipCoreRevision=37,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=zynq,C_NUM_SLAVE_SLOTS=1,C_NUM_MASTER_SLOTS=6,C_AXI_ID_WIDTH=1,C_AXI_ADDR_WIDTH=32,C_AXI_DATA_WIDTH=32,C_AXI_PROTOCOL=2,C_NUM_ADDR_RANGES=1,C_M_AXI_BASE_ADDR=0x0000000041230000000000004122000000000000412100000000000041e0000000000000416000000000000041200000,C_M_AXI_ADDR_WIDTH=0x000000100000001000000010000000100000001000000010,C_S_AXI_BASE_ID=0x00000000,C_S_AXI_THREAD_ID_WIDTH=0x00000000,C_AXI_SUPPORTS_USER_SIGNALS=0,C_AXI_AWUSER_WIDTH=1,C_AXI_ARUSER_WIDTH=1,C_AXI_WUSER_WIDTH=1,C_AXI_RUSER_WIDTH=1,C_AXI_BUSER_WIDTH=1,C_M_AXI_WRITE_CONNECTIVITY=0x000000010000000100000001000000010000000100000001,C_M_AXI_READ_CONNECTIVITY=0x000000010000000100000001000000010000000100000001,C_R_REGISTER=1,C_S_AXI_SINGLE_THREAD=0x00000001,C_S_AXI_WRITE_ACCEPTANCE=0x00000001,C_S_AXI_READ_ACCEPTANCE=0x00000001,C_M_AXI_WRITE_ISSUING=0x000000010000000100000001000000010000000100000001,C_M_AXI_READ_ISSUING=0x000000010000000100000001000000010000000100000001,C_S_AXI_ARB_PRIORITY=0x00000000,C_M_AXI_SECURE=0x000000000000000000000000000000000000000000000000,C_CONNECTIVITY_MODE=0}";
+  attribute CORE_GENERATION_INFO of main_design_axi_interconnect_0_imp_xbar_0 : entity is "main_design_axi_interconnect_0_imp_xbar_0,axi_crossbar_v2_1_37_axi_crossbar,{x_ipProduct=Vivado 2025.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axi_crossbar,x_ipVersion=2.1,x_ipCoreRevision=37,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=zynq,C_NUM_SLAVE_SLOTS=1,C_NUM_MASTER_SLOTS=6,C_AXI_ID_WIDTH=1,C_AXI_ADDR_WIDTH=32,C_AXI_DATA_WIDTH=32,C_AXI_PROTOCOL=2,C_NUM_ADDR_RANGES=1,C_M_AXI_BASE_ADDR=0xffffffffffffffff000000004122000000000000412100000000000041e0000000000000416000000000000041200000,C_M_AXI_ADDR_WIDTH=0x000000000000001000000010000000100000001000000010,C_S_AXI_BASE_ID=0x00000000,C_S_AXI_THREAD_ID_WIDTH=0x00000000,C_AXI_SUPPORTS_USER_SIGNALS=0,C_AXI_AWUSER_WIDTH=1,C_AXI_ARUSER_WIDTH=1,C_AXI_WUSER_WIDTH=1,C_AXI_RUSER_WIDTH=1,C_AXI_BUSER_WIDTH=1,C_M_AXI_WRITE_CONNECTIVITY=0x000000010000000100000001000000010000000100000001,C_M_AXI_READ_CONNECTIVITY=0x000000010000000100000001000000010000000100000001,C_R_REGISTER=1,C_S_AXI_SINGLE_THREAD=0x00000001,C_S_AXI_WRITE_ACCEPTANCE=0x00000001,C_S_AXI_READ_ACCEPTANCE=0x00000001,C_M_AXI_WRITE_ISSUING=0x000000010000000100000001000000010000000100000001,C_M_AXI_READ_ISSUING=0x000000010000000100000001000000010000000100000001,C_S_AXI_ARB_PRIORITY=0x00000000,C_M_AXI_SECURE=0x000000000000000000000000000000000000000000000000,C_CONNECTIVITY_MODE=0}";
   attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of main_design_axi_interconnect_0_imp_xbar_0 : entity is "yes";
 end main_design_axi_interconnect_0_imp_xbar_0;
