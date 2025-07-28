@@ -14,6 +14,7 @@
 #include <xil_printf.h>
 #include "custom_interrupt.h"
 #include "custom_mpu9250.h"
+#include "custom_ssd1308.h"
 #include "custom_uart.h"
 #include "custom_gpioswitchbutton.h"
 #include "custom_gpioled.h"
@@ -91,6 +92,11 @@ int main()
 
 	status = CMPU9250_Init(&Iic);
     if (status != XST_SUCCESS) return XST_FAILURE;
+    print("MPU9250 initialized\r\n");
+
+	status = CSSD1308_Init(&Iic);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+    print("SSD1308 initialized\r\n");
 
     UpdateGpio();
 
