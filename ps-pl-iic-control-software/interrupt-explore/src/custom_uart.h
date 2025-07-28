@@ -10,6 +10,6 @@
 #define CUSTOM_UART_H
 
 /************************** Function Prototypes ******************************/
-extern int InitUart();
+extern int CUart_Init();
 
 #endif

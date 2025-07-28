@@ -34,6 +34,7 @@ set(USER_COMPILE_SOURCES
 "custom_interrupt.c"
 "custom_uart.c"
 "main.c"
+"custom_mpu9250.c"
 )
 
 # -----------------------------------------

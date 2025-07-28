@@ -37,6 +37,6 @@
 #define AXI_GPIO_LED_PLAIN3_MASK 0b1000
 
 /************************** Function Prototypes ******************************/
-int InitGpioLed(XGpio *InstancePtr);
+extern int CGpioL_Init(XGpio *InstancePtr);
 
 #endif

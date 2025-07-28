@@ -41,7 +41,7 @@ int SetupInterruptSystem(XScuGic *XScuGicInstancePtr);
 * @note		None.
 *
 ******************************************************************************/
-int BeginInitInterruptController(XScuGic *XScuGicInstancePtr)
+int CGic_BeginInit(XScuGic *XScuGicInstancePtr)
 {
     int status;
 
@@ -67,7 +67,7 @@ int BeginInitInterruptController(XScuGic *XScuGicInstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-int EndInitInterruptController(XScuGic *XScuGicInstancePtr)
+int CGic_EndInit(XScuGic *XScuGicInstancePtr)
 {
     int status;
 

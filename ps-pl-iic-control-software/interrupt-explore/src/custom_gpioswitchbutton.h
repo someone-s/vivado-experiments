@@ -32,7 +32,7 @@
 #define AXI_GPIO_SWITCHBUTTON_BUTTON3_MASK  0b1000
 
 /************************** Function Prototypes ******************************/
-int InitGpioSwitchButton(XGpio *InstancePtr);
-int EnableGpioSwitchButtonInterrupt(XScuGic *XScuGicInstancePtr, XGpio *XGpioInstancePtr, void (*InterruptAction)());
+extern int CGpioSB_Init(XGpio *InstancePtr);
+extern int CGpioSB_EnableInterrupt(XScuGic *XScuGicInstancePtr, XGpio *XGpioInstancePtr, void (*InterruptAction)());
 
 #endif

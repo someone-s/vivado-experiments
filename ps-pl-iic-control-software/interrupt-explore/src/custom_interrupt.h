@@ -23,7 +23,7 @@
 
 
 /************************** Function Prototypes ******************************/
-int BeginInitInterruptController(XScuGic *XScuGicInstancePtr);
-int EndInitInterruptController(XScuGic *XScuGicInstancePtr);
+extern int CGic_BeginInit(XScuGic *XScuGicInstancePtr);
+extern int CGic_EndInit(XScuGic *XScuGicInstancePtr);
 
 #endif

@@ -30,7 +30,7 @@
 
 
 /************************** Function Prototypes ******************************/
-static void GpioSwitchButtonInterruptHandler(void *InstancePtr);
+static void CGpioSB_InterruptHandler(void *InstancePtr);
 
 /************************** Variable Definitions *****************************/
 static void (*StoredInterruptAction)() = NULL;
@@ -47,7 +47,7 @@ static void (*StoredInterruptAction)() = NULL;
 * @note		None.
 *
 ******************************************************************************/
-int InitGpioSwitchButton(XGpio *InstancePtr)
+int CGpioSB_Init(XGpio *InstancePtr)
 {
     int status;
 
@@ -76,13 +76,13 @@ int InitGpioSwitchButton(XGpio *InstancePtr)
 * @note		None.
 *
 ******************************************************************************/
-int EnableGpioSwitchButtonInterrupt(XScuGic *XScuGicInstancePtr, XGpio *XGpioInstancePtr, void (*InterruptAction)())
+int CGpioSB_EnableInterrupt(XScuGic *XScuGicInstancePtr, XGpio *XGpioInstancePtr, void (*InterruptAction)())
 {
     int status;
 
     StoredInterruptAction = InterruptAction;
 
-    status = XScuGic_Connect(XScuGicInstancePtr, INTC_AXI_GPIO_SWITCHBUTTON_INT_ID, (Xil_InterruptHandler)GpioSwitchButtonInterruptHandler, (void *)XGpioInstancePtr);
+    status = XScuGic_Connect(XScuGicInstancePtr, INTC_AXI_GPIO_SWITCHBUTTON_INT_ID, (Xil_InterruptHandler)CGpioSB_InterruptHandler, (void *)XGpioInstancePtr);
     if (status != XST_SUCCESS) return XST_FAILURE;
 
     XGpio_InterruptEnable(XGpioInstancePtr, AXI_GPIO_SWITCHBUTTON_COMBINE_IR_MASK);
@@ -105,7 +105,7 @@ int EnableGpioSwitchButtonInterrupt(XScuGic *XScuGicInstancePtr, XGpio *XGpioIns
 * @note		None.
 *
 ******************************************************************************/
-static void GpioSwitchButtonInterruptHandler(void *InstancePtr)
+static void CGpioSB_InterruptHandler(void *InstancePtr)
 {
     XGpio_InterruptDisable(InstancePtr, AXI_GPIO_SWITCHBUTTON_COMBINE_IR_MASK);
 

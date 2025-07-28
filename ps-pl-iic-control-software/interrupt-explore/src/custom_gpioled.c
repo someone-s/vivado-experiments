@@ -23,7 +23,7 @@
 * @note		None.
 *
 ******************************************************************************/
-int InitGpioLed(XGpio *InstancePtr)
+int CGpioL_Init(XGpio *InstancePtr)
 {
     int status;
 

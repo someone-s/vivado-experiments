@@ -21,7 +21,7 @@
 
 
 /************************** Function Prototypes ******************************/
-int InitUart();
+int CUart_Init();
 
 /************************** Variable Definitions *****************************/
 
@@ -40,7 +40,7 @@ static XUartPs_Config *UartConfig;
 * @note		None.
 *
 ******************************************************************************/
-int InitUart()
+int CUart_Init()
 {
     int status;
 
