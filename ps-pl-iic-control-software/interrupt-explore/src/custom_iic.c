@@ -199,13 +199,19 @@ int CIic_SyncWriteBytesCombo(XIic *InstancePtr, int SlaveAddress, u8 InitialByte
   	Status = XIic_SetAddress(InstancePtr, XII_ADDR_TO_SEND_TYPE, SlaveAddress);
   	if (Status != XST_SUCCESS) return XST_FAILURE;
 
-	TransmissionInProgress = TRUE;
-
 	u8 InitialCopy = InitialByte;
 
+	TransmissionInProgress = TRUE;
+
+  	InstancePtr->Options |= XII_REPEATED_START_OPTION;
   	Status = XIic_MasterSend(InstancePtr, &InitialCopy, ByteCount);
   	if (Status != XST_SUCCESS) return XST_FAILURE;
 
+	while (TransmissionInProgress) {}
+
+	TransmissionInProgress = TRUE;
+	
+	InstancePtr->Options &= ~XII_REPEATED_START_OPTION;
   	Status = XIic_MasterSend(InstancePtr, RegisterDataBuffer, ByteCount);
   	if (Status != XST_SUCCESS) return XST_FAILURE;
 

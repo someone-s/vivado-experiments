@@ -106,10 +106,12 @@ int main()
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("SSD1308 vertical mode set\r\n");
 
-    u8 Data[128 * 8];
-    memset(Data, 0, 128 * 8);
+    u8 Data[128 * 8 + 1];
+    Data[0] = 0x40;
+    memset(&Data[1], 0b11111111, 128 * 8);
+    memset(&Data[1], 0, 1);
 
-    status = CSSD1308_WriteData(&Iic, Data, 128 * 8);
+    status = CSSD1308_WriteData(&Iic, Data, 128 * 8 + 1);
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("SSD1308 data wrote\r\n");
 
