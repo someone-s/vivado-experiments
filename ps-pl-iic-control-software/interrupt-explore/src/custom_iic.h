@@ -56,5 +56,6 @@ extern int CIic_SyncWriteBit(XIic *InstancePtr, int SlaveAddress, u8 RegisterAdr
 extern int CIic_SyncWriteBits(XIic *InstancePtr, int SlaveAddress, u8 RegisterAdrress, u8 BitStart, u8 BitCount, u8 BitData);
 extern int CIic_IsMatchBit(XIic *InstancePtr, int SlaveAddress, u8 RegisterAdrress,u8 BitPosition, u8 BitSet, u8 *Result);
 extern int CIic_IsMatchBits(XIic *InstancePtr, int SlaveAddress, u8 RegisterAdrress, u8 BitStart, u8 BitCount, u8 BitData, u8 *Result);
+extern int CIic_SyncWriteBytesCombo(XIic *InstancePtr, int SlaveAddress, u8 InitialByte, u8 *RegisterDataBuffer, int ByteCount);
 
 #endif

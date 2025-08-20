@@ -7,8 +7,8 @@
  * custom_ssd1308.c: simple test application
  */
 
-#include "custom_iic.h"
 #include "custom_ssd1308.h"
+#include "custom_iic.h"
 #include <sleep.h>
 #include <stdint.h>
 #include <xiic.h>
@@ -35,9 +35,11 @@
 #define SSD1308_MEMCONFIG_HORIZONTAL 0b00
 #define SSD1308_MEMCONFIG_VERTICAL 0b01
 #define SSD1308_MEMCONFIG_PAGE 0b10
+#define SSD1308_MEMCONFIG_INVALID 0b11
 //
 #define SSD1308_RANGE_COLUMN_COMMAND 0x21
 #define SSD1308_RANGE_PAGE_COMMAND 0x22
+#define SSD1308_START_PAGE_COMMAND(Page) (0xB0 + Page)
 //
 // Timing bytes
 #define SSD1308_MULTIPLEX_COMMAND 0xA8
@@ -49,8 +51,8 @@
 #define SSD1308_DOCONFIG_OSC_BIT 7
 #define SSD1308_DOCONFIG_OSC_LENGTH 4
 #define SSD1308_DOCONFIG(Div, Osc)                                             \
-    (Div << (SSD1308_DOCONFIG_DIV_BIT - SSD1308_DOCONFIG_DIV_LENGTH + 1) |     \
-     Osc << (SSD1308_DOCONFIG_OSC_BIT - SSD1308_DOCONFIG_OSC_LENGTH + 1))
+  (Div << (SSD1308_DOCONFIG_DIV_BIT - SSD1308_DOCONFIG_DIV_LENGTH + 1) |       \
+   Osc << (SSD1308_DOCONFIG_OSC_BIT - SSD1308_DOCONFIG_OSC_LENGTH + 1))
 
 // Charge Pump bytes
 #define SSD1308_Pump_Set_Charge_Reg 0x8D
@@ -75,9 +77,8 @@
 #define SSD1308_PCONFIG_SEQUENTIAL_BIT 4
 #define SSD1308_PCONFIG_LRREMAP_BIT 5
 #define SSD1308_PCONFIG(Seq, Remap)                                            \
-    (SSD1308_PCONFIG_BASE |                                                    \
-     (Seq << SSD1308_PCONFIG_SEQUENTIAL_BIT) |                                 \
-     (Remap << SSD1308_PCONFIG_LRREMAP_BIT))
+  (SSD1308_PCONFIG_BASE | (Seq << SSD1308_PCONFIG_SEQUENTIAL_BIT) |            \
+   (Remap << SSD1308_PCONFIG_LRREMAP_BIT))
 //
 #define SSD1308_SCANDIR_NORMAL_COMMAND 0xC0
 #define SSD1308_SCANDIR_REMAP_COMMAND 0xC8
@@ -110,8 +111,7 @@
 int CSSD1308_Init(XIic *InstancePtr) {
   int Status;
 
-  u8 setup[] = {
-                // Set multiplex ratio to 0x3f
+  u8 setup[] = {// Set multiplex ratio to 0x3f
                 SSD1308_CONTROL_COMMAND, SSD1308_MULTIPLEX_COMMAND,
                 SSD1308_CONTROL_COMMAND, SSD1308_MULCONFIG_DEFAULT,
                 // Set display offset
@@ -137,14 +137,144 @@ int CSSD1308_Init(XIic *InstancePtr) {
                 SSD1308_CONTROL_COMMAND, SSD1308_CLOCK_DIV_OSC_COMMAND,
                 SSD1308_CONTROL_COMMAND, SSD1308_DOCONFIG(0, 8),
                 // Set display on
-                SSD1308_CONTROL_COMMAND, SSD1308_POWER_ON_COMMAND,
-                // Set horizontal address mode
+                SSD1308_CONTROL_COMMAND, SSD1308_POWER_ON_COMMAND};
+
+  Status = CIic_SyncWriteBytes(InstancePtr, SSD1308_DEVICE_ADDRESS, setup,
+                               sizeof(setup) / sizeof(u8));
+  if (Status != XST_SUCCESS)
+    return XST_FAILURE;
+
+  return XST_SUCCESS;
+}
+
+/*****************************************************************************/
+/**
+ *
+ * This function sets memory address mode of the display
+ *
+ * @param	None.
+ *
+ * @return	XST_SUCCESS if no error.
+ *
+ * @note		None.
+ *
+ ******************************************************************************/
+int CSSD1308_SetMemoryAddressMode(XIic *InstancePtr,
+                                  CSSD1308_MemoryAddressMode mode) {
+  int Status;
+
+  int modeByte = SSD1308_MEMCONFIG_INVALID;
+  switch (mode) {
+  case HORIZONTAL:
+    modeByte = SSD1308_MEMCONFIG_HORIZONTAL;
+    break;
+  case VERTICAL:
+    modeByte = SSD1308_MEMCONFIG_VERTICAL;
+    break;
+  case PAGE:
+    modeByte = SSD1308_MEMCONFIG_PAGE;
+    break;
+  }
+
+  u8 setup[] = {// Set horizontal address mode
                 SSD1308_CONTROL_COMMAND, SSD1308_MEMORY_MODE_COMMAND,
-                SSD1308_CONTROL_COMMAND, SSD1308_MEMCONFIG_VERTICAL};
+                SSD1308_CONTROL_COMMAND, modeByte};
 
-    Status = CIic_SyncWriteBytes(InstancePtr, 
-        SSD1308_DEVICE_ADDRESS, setup, sizeof(setup) / sizeof(u8));
-    if (Status != XST_SUCCESS) return XST_FAILURE;
+  Status = CIic_SyncWriteBytes(InstancePtr, SSD1308_DEVICE_ADDRESS, setup,
+                               sizeof(setup) / sizeof(u8));
+  if (Status != XST_SUCCESS)
+    return XST_FAILURE;
 
-    return XST_SUCCESS;
+  return XST_SUCCESS;
+}
+
+/*****************************************************************************/
+/**
+ *
+ * This function sets memory address mode of the display, for horizontal and
+ * vertical addresing mode only
+ *
+ * @param	None.
+ *
+ * @return	XST_SUCCESS if no error.
+ *
+ * @note		None.
+ *
+ ******************************************************************************/
+int CSSD1308_SetHorizontalVerticalAddressRange(XIic *InstancePtr, CSSD1308_MemoryAddressMode Mode,
+                             u8 PageStart, u8 PageEnd, u8 ColumnStart,
+                             u8 ColumnEnd) {
+  int Status;
+
+  if (Mode == PAGE)
+    return XST_FAILURE;
+
+  u8 setup[] = {
+      // Set page range
+      SSD1308_CONTROL_COMMAND, SSD1308_RANGE_PAGE_COMMAND,
+      SSD1308_CONTROL_COMMAND, PageStart, SSD1308_CONTROL_COMMAND, PageEnd,
+      // Set column range
+      SSD1308_CONTROL_COMMAND, SSD1308_RANGE_COLUMN_COMMAND,
+      SSD1308_CONTROL_COMMAND, ColumnStart, SSD1308_CONTROL_COMMAND, ColumnEnd};
+
+  Status = CIic_SyncWriteBytes(InstancePtr, SSD1308_DEVICE_ADDRESS, setup,
+                               sizeof(setup) / sizeof(u8));
+  if (Status != XST_SUCCESS)
+    return XST_FAILURE;
+
+  return XST_SUCCESS;
+}
+
+/*****************************************************************************/
+/**
+ *
+ * This function sets start memory address mode of the display for page addressing mode
+ *
+ * @param	None.
+ *
+ * @return	XST_SUCCESS if no error.
+ *
+ * @note		None.
+ *
+ ******************************************************************************/
+int CSSD1308_SetPageAddressRange(XIic *InstancePtr, CSSD1308_MemoryAddressMode Mode,
+                             u8 PageAddresss) {
+  int Status;
+
+  if (Mode != PAGE)
+    return XST_FAILURE;
+
+  u8 setup[] = {
+      // Set start page
+      SSD1308_CONTROL_COMMAND, SSD1308_START_PAGE_COMMAND(PageAddresss)};
+
+  Status = CIic_SyncWriteBytes(InstancePtr, SSD1308_DEVICE_ADDRESS, setup,
+                               sizeof(setup) / sizeof(u8));
+  if (Status != XST_SUCCESS)
+    return XST_FAILURE;
+
+  return XST_SUCCESS;
+}
+
+
+/*****************************************************************************/
+/**
+ *
+ * This function sets start memory address mode of the display for page addressing mode
+ *
+ * @param	None.
+ *
+ * @return	XST_SUCCESS if no error.
+ *
+ * @note		None.
+ *
+ ******************************************************************************/
+int CSSD1308_WriteData(XIic *InstancePtr, u8 *Data, int DataByteCount) {
+  int Status;
+
+  Status = CIic_SyncWriteBytesCombo(InstancePtr, SSD1308_DEVICE_ADDRESS, SSD1308_CONTROL_DATA, Data, DataByteCount);
+  if (Status != XST_SUCCESS)
+    return XST_FAILURE;
+
+  return XST_SUCCESS;
 }

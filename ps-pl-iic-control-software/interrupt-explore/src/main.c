@@ -98,12 +98,23 @@ int main()
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("SSD1308 initialized\r\n");
 
+    status = CSSD1308_SetMemoryAddressMode(&Iic, VERTICAL);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+    print("SSD1308 address mode set\r\n");
+
+    status = CSSD1308_SetHorizontalVerticalAddressRange(&Iic, VERTICAL, 0, 7, 0, 127);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+    print("SSD1308 vertical mode set\r\n");
+
+    u8 Data[128 * 8];
+    memset(Data, 0, 128 * 8);
+
+    status = CSSD1308_WriteData(&Iic, Data, 128 * 8);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+    print("SSD1308 data wrote\r\n");
+
     UpdateGpio();
 
-    // u8 data;
-    // status = CIic_SyncReadByte(&Iic, 0x68, 0x6c, &data);
-    // if (status != XST_SUCCESS) return XST_FAILURE;
-    // xil_printf("0x%x\r\n",data);
 
     while (TRUE) {
         int16_t accelX, accelY, accelZ, temp, gyroX, gyroY, gyroZ, magnoX, magnoY, magnoZ;
