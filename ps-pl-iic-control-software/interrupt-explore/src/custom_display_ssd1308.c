@@ -70,7 +70,6 @@ int Buffer_TransferPixels(XIic *InstancePtr, int lowX, int lowY, int highX, int 
 
     Status = CSSD1308_SetHorizontalVerticalAddressRange(InstancePtr, HORIZONTAL, lowY / 8, highY / 8, lowX, highX);
     if (Status != XST_SUCCESS) return XST_FAILURE;
-    print("SSD1308 vertical mode set\r\n");
 
     for (int r = lowY / 8; r <= highY / 8; r++) 
     {
@@ -78,7 +77,6 @@ int Buffer_TransferPixels(XIic *InstancePtr, int lowX, int lowY, int highX, int 
         Status = CSSD1308_WriteData(InstancePtr, &buffer[r * 128 + lowX], 1 + highX - lowX + 1);
         buffer[r * 128 + lowX] = stored;
         if (Status != XST_SUCCESS) return XST_FAILURE;
-        print("SSD1308 data wrote\r\n");
     }
 
     return XST_SUCCESS;
@@ -104,15 +102,12 @@ int CDisplay_Init(XIic *InstancePtr)
 
 	Status = CSSD1308_Init(InstancePtr);
     if (Status != XST_SUCCESS) return XST_FAILURE;
-        print("SSD1308 a\r\n");
 
     Status = CSSD1308_SetMemoryAddressMode(InstancePtr, HORIZONTAL);
     if (Status != XST_SUCCESS) return XST_FAILURE;
-        print("SSD1308 b\r\n");
 
     Status = Buffer_TransferPixels(InstancePtr, 0, 0, 127, 63);
     if (Status != XST_SUCCESS) return XST_FAILURE;
-        print("SSD1308 c\r\n");
 
     return XST_SUCCESS;
 }
@@ -146,9 +141,6 @@ int CDisplay_Drawline(XIic *InstancePtr, int startX, int startY, int endX, int e
 
     for (int s = 0; s < stepCount; s++)
         Buffer_SetPixel(minX + (int)(stepX * s), minY + (int)(stepY * s));
-
-
-    printf("%i %i %i %i\r\n", minX, minY, maxX, maxY);
 
     return Buffer_TransferPixels(InstancePtr, minX, minY, maxX, maxY);
 }
