@@ -21,4 +21,6 @@ extern int CDisplay_Drawline(
     XIic *InstancePtr, 
     int startX, int startY, 
     int endX, int endY);
+
+extern int CDisplay_DrawChar(XIic *InstancePtr, char Character, int X, int Y);
 #endif

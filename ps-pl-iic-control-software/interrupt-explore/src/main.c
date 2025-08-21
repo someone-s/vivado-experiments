@@ -99,7 +99,7 @@ int main()
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("Display initialized\r\n");
 
-    status = CDisplay_Drawline(&Iic, 0, 0, 127, 63);
+    //status = CDisplay_Drawline(&Iic, 0, 0, 127, 63);
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("Line A drawn\r\n");
     status = CDisplay_Drawline(&Iic, 0, 0, 127, 0);
@@ -112,6 +112,47 @@ int main()
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("Line D drawn\r\n");
     status = CDisplay_Drawline(&Iic, 127, 0, 127, 63);
+
+    CDisplay_DrawChar(&Iic, 'A', 0, 10);
+    CDisplay_DrawChar(&Iic, 'B', 5, 10);
+    CDisplay_DrawChar(&Iic, 'C', 10, 10);
+    CDisplay_DrawChar(&Iic, 'D', 15, 10);
+    CDisplay_DrawChar(&Iic, 'E', 20, 10);
+    CDisplay_DrawChar(&Iic, 'F', 25, 10);
+    CDisplay_DrawChar(&Iic, 'G', 30, 10);
+    CDisplay_DrawChar(&Iic, 'H', 35, 10);
+    CDisplay_DrawChar(&Iic, 'I', 40, 10);
+    CDisplay_DrawChar(&Iic, 'J', 45, 10);
+    CDisplay_DrawChar(&Iic, 'K', 50, 10);
+    CDisplay_DrawChar(&Iic, 'L', 55, 10);
+    CDisplay_DrawChar(&Iic, 'M', 60, 10);
+
+    CDisplay_DrawChar(&Iic, 'N', 0, 20);
+    CDisplay_DrawChar(&Iic, 'O', 5, 20);
+    CDisplay_DrawChar(&Iic, 'P', 10, 20);
+    CDisplay_DrawChar(&Iic, 'Q', 15, 20);
+    CDisplay_DrawChar(&Iic, 'R', 20, 20);
+    CDisplay_DrawChar(&Iic, 'S', 25, 20);
+    CDisplay_DrawChar(&Iic, 'T', 30, 20);
+    CDisplay_DrawChar(&Iic, 'U', 35, 20);
+    CDisplay_DrawChar(&Iic, 'V', 40, 20);
+    CDisplay_DrawChar(&Iic, 'W', 45, 20);
+    CDisplay_DrawChar(&Iic, 'X', 50, 20);
+    CDisplay_DrawChar(&Iic, 'Y', 55, 20);
+    CDisplay_DrawChar(&Iic, 'Z', 60, 20);
+
+    CDisplay_DrawChar(&Iic, '1', 0, 30);
+    CDisplay_DrawChar(&Iic, '2', 5, 30);
+    CDisplay_DrawChar(&Iic, '3', 10, 30);
+    CDisplay_DrawChar(&Iic, '4', 15, 30);
+    CDisplay_DrawChar(&Iic, '5', 20, 30);
+    CDisplay_DrawChar(&Iic, '6', 25, 30);
+    CDisplay_DrawChar(&Iic, '7', 30, 30);
+    CDisplay_DrawChar(&Iic, '8', 35, 30);
+    CDisplay_DrawChar(&Iic, '9', 40, 30);
+    CDisplay_DrawChar(&Iic, '0', 45, 30);
+    CDisplay_DrawChar(&Iic, ',', 50, 30);
+    CDisplay_DrawChar(&Iic, '.', 55, 30);
 
     UpdateGpio();
 
