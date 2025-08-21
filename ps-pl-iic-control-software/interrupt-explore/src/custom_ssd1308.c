@@ -9,8 +9,6 @@
 
 #include "custom_ssd1308.h"
 #include "custom_iic.h"
-#include <sleep.h>
-#include <stdint.h>
 #include <xiic.h>
 #include <xil_types.h>
 #include <xstatus.h>

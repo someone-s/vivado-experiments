@@ -9,7 +9,6 @@
 
 #include "custom_display_ssd1308.h"
 #include "custom_ssd1308.h"
-#include <xil_printf.h>
 #include <stdio.h>
 #include <xstatus.h>
 

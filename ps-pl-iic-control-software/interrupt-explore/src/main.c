@@ -163,7 +163,9 @@ int main()
         if (status != XST_SUCCESS) return XST_FAILURE;
         status = CMPU9250_GetMagno(&Iic, &magnoX, &magnoY, &magnoZ);
         if (status != XST_SUCCESS) return XST_FAILURE;
-        //xil_printf("%6d %6d %6d %6d %6d %6d %6d %6d %6d %6d\r\n", accelX, accelY, accelZ, temp, gyroX, gyroY, gyroZ, magnoX, magnoY, magnoZ);
+
+
+        xil_printf("%6d %6d %6d %6d %6d %6d %6d %6d %6d %6d\r\n", accelX, accelY, accelZ, temp, gyroX, gyroY, gyroZ, magnoX, magnoY, magnoZ);
     }
 
     return XST_SUCCESS;
