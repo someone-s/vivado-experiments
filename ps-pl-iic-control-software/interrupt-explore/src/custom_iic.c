@@ -8,6 +8,8 @@
  */
 
 #include "custom_iic.h"
+#include <stdlib.h>
+#include <string.h>
 #include <xiic.h>
 #include <xiic_l.h>
 #include <xil_printf.h>
@@ -173,39 +175,6 @@ int CIic_SyncWriteBytes(XIic *InstancePtr, int SlaveAddress, u8 *RegisterDataBuf
 
 	TransmissionInProgress = TRUE;
 
-  	Status = XIic_MasterSend(InstancePtr, RegisterDataBuffer, ByteCount);
-  	if (Status != XST_SUCCESS) return XST_FAILURE;
-
-	while (TransmissionInProgress || XIic_IsIicBusy(InstancePtr)) {}
-
-  	return XST_SUCCESS;
-}
-
-/*****************************************************************************/
-/**
- *
- * This function wraps XIic to write bytes
- *
- * @param	None.
- *
- * @return	XST_SUCCESS if no error.
- *
- * @note		None.
- *
- ******************************************************************************/
-int CIic_SyncWriteBytesCombo(XIic *InstancePtr, int SlaveAddress, u8 InitialByte, u8 *RegisterDataBuffer, int ByteCount) {
-  	int Status;
-
-  	Status = XIic_SetAddress(InstancePtr, XII_ADDR_TO_SEND_TYPE, SlaveAddress);
-  	if (Status != XST_SUCCESS) return XST_FAILURE;
-
-	u8 InitialCopy = InitialByte;
-
-	TransmissionInProgress = TRUE;
-
-  	Status = XIic_MasterSend(InstancePtr, &InitialCopy, 1);
-  	if (Status != XST_SUCCESS) return XST_FAILURE;
-	
   	Status = XIic_MasterSend(InstancePtr, RegisterDataBuffer, ByteCount);
   	if (Status != XST_SUCCESS) return XST_FAILURE;
 

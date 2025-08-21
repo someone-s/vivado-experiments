@@ -269,12 +269,13 @@ int CSSD1308_SetPageAddressRange(XIic *InstancePtr, CSSD1308_MemoryAddressMode M
  * @note		None.
  *
  ******************************************************************************/
-int CSSD1308_WriteData(XIic *InstancePtr, u8 *Data, int DataByteCount) {
+int CSSD1308_WriteData(XIic *InstancePtr, u8 *OneThenData, int OnePlusDataByteCount) {
   int Status;
 
-  Status = CIic_SyncWriteBytesCombo(InstancePtr, SSD1308_DEVICE_ADDRESS, SSD1308_CONTROL_DATA, Data, DataByteCount);
-  if (Status != XST_SUCCESS)
-    return XST_FAILURE;
+  OneThenData[0] = SSD1308_CONTROL_DATA;
+
+  Status = CIic_SyncWriteBytes(InstancePtr, SSD1308_DEVICE_ADDRESS, OneThenData, OnePlusDataByteCount);
+  if (Status != XST_SUCCESS) return XST_FAILURE;
 
   return XST_SUCCESS;
 }

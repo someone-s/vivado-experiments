@@ -34,6 +34,5 @@ extern int CSSD1308_SetPageAddressRange(
     u8 PageAddresss);
 extern int CSSD1308_WriteData(
     XIic *InstancePtr, 
-    u8 *Data, 
-    int DataByteCount);
+    u8 *OneThenData, int OnePlusDataByteCount);
 #endif

@@ -12,6 +12,7 @@
 #include <xgpio.h>
 #include <xiic.h>
 #include <xil_printf.h>
+#include "custom_display_ssd1308.h"
 #include "custom_interrupt.h"
 #include "custom_mpu9250.h"
 #include "custom_ssd1308.h"
@@ -94,25 +95,23 @@ int main()
     if (status != XST_SUCCESS) return XST_FAILURE;
     print("MPU9250 initialized\r\n");
 
-	status = CSSD1308_Init(&Iic);
+	status = CDisplay_Init(&Iic);
     if (status != XST_SUCCESS) return XST_FAILURE;
-    print("SSD1308 initialized\r\n");
+    print("Display initialized\r\n");
 
-    status = CSSD1308_SetMemoryAddressMode(&Iic, VERTICAL);
+    status = CDisplay_Drawline(&Iic, 0, 0, 127, 63);
     if (status != XST_SUCCESS) return XST_FAILURE;
-    print("SSD1308 address mode set\r\n");
-
-    status = CSSD1308_SetHorizontalVerticalAddressRange(&Iic, VERTICAL, 0, 7, 0, 127);
+    print("Line A drawn\r\n");
+    status = CDisplay_Drawline(&Iic, 0, 0, 127, 0);
     if (status != XST_SUCCESS) return XST_FAILURE;
-    print("SSD1308 vertical mode set\r\n");
-
-    u8 Data[128 * 8];
-    memset(Data, 0b11111111, 128 * 8);
-    memset(Data, 0, 1);
-
-    status = CSSD1308_WriteData(&Iic, Data, 128 * 8 + 1);
+    print("Line B drawn\r\n");
+    status = CDisplay_Drawline(&Iic, 0, 63, 127, 63);
     if (status != XST_SUCCESS) return XST_FAILURE;
-    print("SSD1308 data wrote\r\n");
+    print("Line C drawn\r\n");
+    status = CDisplay_Drawline(&Iic, 0, 0, 0, 63);
+    if (status != XST_SUCCESS) return XST_FAILURE;
+    print("Line D drawn\r\n");
+    status = CDisplay_Drawline(&Iic, 127, 0, 127, 63);
 
     UpdateGpio();
 
@@ -123,7 +122,7 @@ int main()
         if (status != XST_SUCCESS) return XST_FAILURE;
         status = CMPU9250_GetMagno(&Iic, &magnoX, &magnoY, &magnoZ);
         if (status != XST_SUCCESS) return XST_FAILURE;
-        xil_printf("%6d %6d %6d %6d %6d %6d %6d %6d %6d %6d\r\n", accelX, accelY, accelZ, temp, gyroX, gyroY, gyroZ, magnoX, magnoY, magnoZ);
+        //xil_printf("%6d %6d %6d %6d %6d %6d %6d %6d %6d %6d\r\n", accelX, accelY, accelZ, temp, gyroX, gyroY, gyroZ, magnoX, magnoY, magnoZ);
     }
 
     return XST_SUCCESS;

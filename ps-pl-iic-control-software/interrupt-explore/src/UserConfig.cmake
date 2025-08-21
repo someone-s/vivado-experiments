@@ -36,6 +36,7 @@ set(USER_COMPILE_SOURCES
 "main.c"
 "custom_mpu9250.c"
 "custom_ssd1308.c"
+"custom_display_ssd1308.c"
 )
 
 # -----------------------------------------
